@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robux Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #9EFD38;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+        .generator-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 320px;
+        }
+        .input-group {
+            position: relative;
+            margin: 15px 0;
+        }
+        label {
+            display: block;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-align: center;
+            color: #333;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 25px;
+            box-sizing: border-box;
+            text-align: center;
+            font-size: 16px;
+            font-family: 'Poppins', sans-serif;
+        }
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background: url('https://img.icons8.com/color/48/000000/robux.png') no-repeat 95% center;
+            background-size: 24px 24px;
+            text-align: center;
+            padding-right: 40px;
+        }
+        button {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 25px;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .robux-display {
+            font-size: 18px;
+            margin-top: 15px;
+            font-weight: bold;
+            display: none;
+        }
+        .robux-display img {
+            width: 24px;
+            height: 24px;
+            margin-left: 10px;
+        }
+        .loading-bar-container {
+            margin-top: 20px;
+            display: none;
+            width: 100%;
+            text-align: center;
+        }
+        .loading-bar {
+            width: 0;
+            height: 10px;
+            background-color: #4caf50;
+            border-radius: 10px;
+        }
+        .loading-text {
+            margin-top: 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        #dynamicImage {
+            display: none;
+            margin-top: 20px;
+            text-align: center;
+        }
+        #verificationMessage {
+            font-size: 20px;
+            font-weight: bold;
+            color: red;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="generator-container">
+        <h1>Robux Generator</h1>
+        <form id="robuxForm" onsubmit="event.preventDefault(); startLoading();">
+            <div class="input-group">
+                <label for="username">Roblox Username</label>
+                <input type="text" id="username" placeholder="Enter Roblox Username" required>
+            </div>
+            <div class="input-group">
+                <label for="robuxAmount">Select Robux Amount</label>
+                <select id="robuxAmount" required>
+                    <option value="" disabled selected>Select Robux Amount</option>
+                    <option value="1000">1000 Robux</option>
+                    <option value="2500">2500 Robux</option>
+                    <option value="5000">5000 Robux</option>
+                    <option value="10000">10000 Robux</option>
+                </select>
+            </div>
+            <button type="submit">Generate</button>
+        </form>
+        
+        <div class="robux-display" id="robuxDisplay">
+            <span id="robuxValue"></span>
+            <img src="https://img.icons8.com/color/48/000000/robux.png" alt="Robux Logo">
+        </div>
+        
+        <div class="loading-bar-container" id="loadingBarContainer">
+            <div class="loading-bar" id="loadingBar"></div>
+            <div class="loading-text" id="loadingText">0%</div>
+        </div>
+
+        <div id="dynamicImage">
+            <img src="https://img.icons8.com/color/48/000000/robux.png" alt="Robux Image">
+        </div>
+
+        <div id="verificationMessage"></div>
+    </div>
+
+    <script>
+        function startLoading() {
+            var loadingBarContainer = document.getElementById("loadingBarContainer");
+            var loadingBar = document.getElementById("loadingBar");
+            var loadingText = document.getElementById("loadingText");
+            var robuxAmount = document.getElementById("robuxAmount").value;
+            var robuxDisplay = document.getElementById("robuxDisplay");
+            var robuxValue = document.getElementById("robuxValue");
+            var verificationMessage = document.getElementById("verificationMessage");
+
+            loadingBarContainer.style.display = "block";
+            var progress = 0;
+            var interval = setInterval(function() {
+                progress += 2;
+                loadingBar.style.width = progress + "%";
+                loadingText.textContent = progress + "% - " + robuxAmount + " Robux";
+
+                if (progress >= 86) {
+                    clearInterval(interval);
+                    verificationMessage.textContent = "Human Verification...";
+                    setTimeout(function() {
+                        robuxValue.textContent = robuxAmount + " Robux";
+                        robuxDisplay.style.display = "block";
+                        window.location.href = "https://www.lnkmeup.com/unlock/55141";
+                    }, 2000);
+                }
+            }, 50);
+        }
+    </script>
+</body>
+</html>
